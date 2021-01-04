@@ -1,0 +1,25 @@
+extends layout
+
+block style
+    link(rel='stylesheet' href='/css/index.css')
+    
+block content
+    h1 샘플서버
+    form(action="/auth/join", method="post")
+        input(type="email", name="email" placeholder="이메일")
+        input(type="text", name="nick" placeholder="닉네임")
+        input(type="password", name="password" placeholder="비밀번호")
+        button(type="submit") 회원가입
+    form(action="/auth/login", method="post")
+        input(type="email", name="email" placeholder="이메일")
+        input(type="password", name="password" placeholder="비밀번호")
+        button(type="submit") 로그인
+    form(action="/auth/kakao", method="get")
+        button(type="submit") 카카오로그인
+    form(action="/post", method="post" enctype="multipart/form-data")
+        input(name="img" type="file" accept="image/*")
+        button(type="submit") 서브밋 
+    form(action="/auth/logout", method="get")
+        button(type="submit") 로그아웃     
+    div= msg    
+    
