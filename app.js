@@ -6,6 +6,7 @@ const session = require('express-session');
 const dotenv = require('dotenv');
 const passport = require('passport');
 const flash = require('connect-flash');
+const webSocket = require('./socket');
 
 dotenv.config();
 
@@ -72,6 +73,8 @@ app.use((err, req, res, next) => {
     res.render('error');
 });
 
-app.listen(port, () => {
+const server = app.listen(port, () => {
     console.log(port, '번 포트에서 대기중');
 });
+
+webSocket(server);

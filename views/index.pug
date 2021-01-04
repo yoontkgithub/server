@@ -21,5 +21,33 @@ block content
         button(type="submit") 서브밋 
     form(action="/auth/logout", method="get")
         button(type="submit") 로그아웃     
-    div= msg    
-    
+    div= msg
+    button#socket 소켓접속
+    button#namespace 네임스페이스접속    
+    script(src="/socket.io/socket.io.js")
+    script.
+        const socketConnect = document.querySelector('#socket');
+
+        socketConnect.addEventListener('click', () => {
+            const socket = io.connect('http://localhost:3000/', {
+                path: '/socket.io',
+                transports: ['websocket'],
+            });
+
+            socket.on('msg', (data) => {
+                console.log(data);
+            })
+        })
+
+        const namespaceConnect = document.querySelector('#namespace');
+
+        namespaceConnect.addEventListener('click', () => {
+            const socket = io.connect('http://localhost:3000/room', {
+                path: '/socket.io',
+                transports: ['websocket'],
+            });
+
+            socket.on('msg', (data) => {
+                console.log(data);
+            })
+        })
